@@ -1,13 +1,13 @@
 /* Welcome to the SQL mini project. You will carry out this project partly in
 the PHPMyAdmin interface, and partly in Jupyter via a Python connection.
 
-This is Tier 1 of the case study, which means that there'll be more guidance for you about how to 
-setup your local SQLite connection in PART 2 of the case study. 
+This is Tier 1 of the case study, which means that there'll be more guidance for you about how to
+setup your local SQLite connection in PART 2 of the case study.
 
-The questions in the case study are exactly the same as with Tier 2. 
+The questions in the case study are exactly the same as with Tier 2.
 
 PART 1: PHPMyAdmin
-You will complete questions 1-9 below in the PHPMyAdmin interface. 
+You will complete questions 1-9 below in the PHPMyAdmin interface.
 Log in by pasting the following URL into your browser, and
 using the following Username and Password:
 
@@ -30,18 +30,23 @@ Before starting with the questions, feel free to take your time,
 exploring the data, and getting acquainted with the 3 tables. */
 
 
-/* QUESTIONS 
+/* QUESTIONS
 /* Q1: Some of the facilities charge a fee to members, but some do not.
 Write a SQL query to produce a list of the names of the facilities that do. */
 
+SELECT name
+FROM Facilities
+WHERE membercost = 0;
 
 /* Q2: How many facilities do not charge a fee to members? */
 
+4
 
 /* Q3: Write an SQL query to show a list of facilities that charge a fee to members,
 where the fee is less than 20% of the facility's monthly maintenance cost.
 Return the facid, facility name, member cost, and monthly maintenance of the
 facilities in question. */
+
 
 
 /* Q4: Write an SQL query to retrieve the details of facilities with ID 1 and 5.
@@ -76,9 +81,9 @@ Order by descending cost, and do not use any subqueries. */
 
 
 /* PART 2: SQLite
-/* We now want you to jump over to a local instance of the database on your machine. 
+/* We now want you to jump over to a local instance of the database on your machine.
 
-Copy and paste the LocalSQLConnection.py script into an empty Jupyter notebook, and run it. 
+Copy and paste the LocalSQLConnection.py script into an empty Jupyter notebook, and run it.
 
 Make sure that the SQLFiles folder containing thes files is in your working directory, and
 that you haven't changed the name of the .db file from 'sqlite\db\pythonsqlite'.
@@ -86,10 +91,10 @@ that you haven't changed the name of the .db file from 'sqlite\db\pythonsqlite'.
 You should see the output from the initial query 'SELECT * FROM FACILITIES'.
 
 Complete the remaining tasks in the Jupyter interface. If you struggle, feel free to go back
-to the PHPMyAdmin interface as and when you need to. 
+to the PHPMyAdmin interface as and when you need to.
 
 You'll need to paste your query into value of the 'query1' variable and run the code block again to get an output.
- 
+
 QUESTIONS:
 /* Q10: Produce a list of facilities with a total revenue less than 1000.
 The output of facility name and total revenue, sorted by revenue. Remember
@@ -102,4 +107,3 @@ that there's a different cost for guests and members! */
 
 
 /* Q13: Find the facilities usage by month, but not guests */
-

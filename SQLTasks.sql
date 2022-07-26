@@ -82,6 +82,15 @@ Include in your output the name of the court, and the name of the member
 formatted as a single column. Ensure no duplicate data, and order by
 the member name. */
 
+SELECT concat_ws(' ', m.firstname, m.surname) AS fullname, f.name AS facilty
+FROM Members AS m
+  JOIN Bookings AS b
+  ON m.memid = b.memid
+  JOIN Facilities AS f
+  ON b.facid = f.facid
+WHERE bookid IN (SELECT bookid
+				FROM Bookings
+				WHERE facid = 0 OR facid = 1) AND m.firstname != 'GUEST';
 
 /* Q8: Produce a list of bookings on the day of 2012-09-14 which
 will cost the member (or guest) more than $30. Remember that guests have
@@ -90,6 +99,19 @@ the guest user's ID is always 0. Include in your output the name of the
 facility, the name of the member formatted as a single column, and the cost.
 Order by descending cost, and do not use any subqueries. */
 
+SELECT
+  f.name,
+  concat_ws(' ', m.firstname, m.surname) AS member,
+  guestcost,
+  membercost
+FROM Facilities AS f
+JOIN Bookings AS b
+ON f.facid = b.facid
+JOIN Members AS m
+ON b.memid = m.memid
+WHERE (starttime BETWEEN '2012-09-14 00:00:00' AND '2012-09-15 00:00:00')
+		  AND ((m.memid = 0 AND guestcost * slots > 30) OR
+           (m.memid != 0 AND membercost * slots > 30));
 
 /* Q9: This time, produce the same result as in Q8, but using a subquery. */
 

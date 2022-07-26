@@ -115,6 +115,20 @@ WHERE (starttime BETWEEN '2012-09-14 00:00:00' AND '2012-09-15 00:00:00')
 
 /* Q9: This time, produce the same result as in Q8, but using a subquery. */
 
+SELECT  f.name,
+		  concat_ws(' ', m.firstname, m.surname) AS member,
+  		guestcost,
+  		membercost
+FROM Bookings AS b
+JOIN Facilities AS f
+ON b.facid = f.facid
+JOIN Members AS m
+ON b.memid = m.memid
+WHERE starttime IN (
+      SELECT starttime FROM Bookings
+    	WHERE starttime BETWEEN '2012-09-14 00:00:00' AND '2012-09-15 00:00:00'
+    	AND ((m.memid = 0 AND guestcost * slots > 30) OR
+         (m.memid != 0 AND membercost * slots > 30)));
 
 /* PART 2: SQLite
 /* We now want you to jump over to a local instance of the database on your machine.
